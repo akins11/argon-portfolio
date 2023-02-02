@@ -4,7 +4,6 @@ library(htmltools)
 
 source("C:/Users/AYOMIDE/Documents/R/agron_portfolio/utl.R")
 
-text_color <- "#32325D"
 
 main_project_page <- argon_page(
   title = "projects",
@@ -37,7 +36,7 @@ main_project_page <- argon_page(
         ),
         
         argonTab( # ---------------------------------------------| Analytics App
-          tabName = "Analytics App",
+          tabName = "Analytic App",
           active = TRUE,
           
           argonRow( 

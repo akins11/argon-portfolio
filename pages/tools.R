@@ -47,6 +47,13 @@ tool_page <- argon_page(
                                            "Power Query", 
                                            "Dashboard")),
       tool_box("html_b_logo.webp")
+    ),
+    
+    argonRow(
+      center = TRUE,
+      
+      # tool_box("css_b_logo.png"),
+      tool_box("bootstrap_b_logo.svg")
     )
   ),
   

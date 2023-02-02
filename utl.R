@@ -1,6 +1,7 @@
 text_color <- "#32325D"
 
 
+
 argon_page <- function(..., title = NULL, description = NULL, author = NULL, 
                        navbar = NULL, footer = NULL, favicon = NULL,
                        analytics = NULL){
@@ -57,6 +58,7 @@ argon_page <- function(..., title = NULL, description = NULL, author = NULL,
 }
 
 
+
 argon_dropdown <- function(...) {
   dropdown_class <- "dropdown-menu dropdown-menu-lg"
   
@@ -69,12 +71,16 @@ argon_dropdown <- function(...) {
       `data-toggle` = "dropdown",
       role = "button",
       
-      htmltools::tags$i(class = "ni ni-bullet-list-67 d-lg-none"),
+      # htmltools::tags$i(class = "ni ni-bullet-list-67 d-lg-none"),
       
       htmltools::tags$span(
         class = "nav-link-inner--text",
         
-        argonR::argonIcon(name = "bullet-list-67", color = "default") 
+        shiny::span(
+          class = "c-icon",
+          
+          fa_icon("rectangle-list", FALSE)
+        )
       )
     ),
     
@@ -92,6 +98,7 @@ argon_dropdown <- function(...) {
 
 
 port_nav <- function() {
+  
   argonR::argonNavbar(
     id = "main-navbar",
     src =  "inst/images/port_logo.svg",
@@ -148,12 +155,14 @@ port_nav <- function() {
 }
 
 
+
 fa_icon <- function(name, brand = TRUE) {
   type <- ifelse(brand, "brands", "solid")
   
   htmltools::tags$i(class = glue::glue("fa-{type} fa-{name}"))
   # htmltools::tags$i(class = "fa-brands fa-github")
 }
+
 
 
 plain_card <- function(..., 
@@ -181,7 +190,6 @@ plain_card <- function(...,
   
   argonR::argonColumn(width = width, cardTag)
 }
-
 
 
 
@@ -216,27 +224,30 @@ img_card <- function(src = NULL,
 
 
 
+custom_badge <- function(text) {
+  shiny::span(
+    class = "c-badge",
+    
+    text
+  )
+}
+
+
+
 tool_box <- function(img = NULL, framework = NULL) {
   
   if (!is.null(framework)) {
     bd_width <- ifelse(length(framework) > 3, 3, 4)
     
-    fw <- lapply(
-      framework,
-      
-      function(.x) {
-        argonR::argonColumn(
-          width = bd_width,
-          
-          argonR::argonBadge(
-            text = .x,
-            # src = "https://www.google.com",
-            pill = FALSE,
-            status = "primary"
-          )
+    fw <- lapply(framework, \(.x) {
+      argonR::argonColumn(
+        width = bd_width,
+
+        custom_badge(
+          text = .x
         )
-      }
-    )
+      )
+      })
     
   } else {
     fw <- htmltools::div()
@@ -262,6 +273,7 @@ tool_box <- function(img = NULL, framework = NULL) {
 }
 
 
+
 project_container <- function(name, 
                               link, 
                               img_src, 
@@ -273,22 +285,13 @@ project_container <- function(name,
   if (!is.null(framework)) {
     bd_width <- ifelse(length(framework) > 3, 2, 3)
     
-    fw <- lapply(
-      framework,
-      
-      function(.x) {
+    fw <- lapply(framework, \(.x) {
         argonR::argonColumn(
           width = bd_width,
           
-          argonR::argonBadge(
-            text = .x,
-            # src = "https://www.google.com",
-            pill = FALSE,
-            status = "primary"
-          )
+          custom_badge(text = .x)
         )
-      }
-    )
+      })
     
   } else {
     fw <- htmltools::div()
@@ -335,7 +338,9 @@ project_container <- function(name,
 }
 
 
+
 project_card <- function(..., title, src, icon, github_src = NULL) {
+  
   card_class <- "card my-3 shadow border-0 bg-Gray 100"
   icon_class <- "icon icon-shape rounded-circle mb-4 icon-shape-default"
   
@@ -351,18 +356,19 @@ project_card <- function(..., title, src, icon, github_src = NULL) {
         class = "row align-items-center m-2",
         
         # Icon -------------------------------->
-        argonR::argonIconWrapper(
-          iconTag = icon,
-          circle = TRUE,
-          size = "sm",
-          shadow = TRUE,
-          status = "default",
-          hover_shadow = FALSE
-        ),
+        # argonR::argonIconWrapper(
+        #   iconTag = icon,
+        #   circle = TRUE,
+        #   size = "sm",
+        #   shadow = TRUE,
+        #   status = "default",
+        #   hover_shadow = FALSE
+        # ),
         
         # Title ------------------------------->
         htmltools::h6(
-          class = "text-default my-0 mx-1 pl-3",
+          class = "text-default my-0 mx-1 pl-2",
+          style = "font-weight: 500; color: #5E5E5E; font-size: 1.5rem;",
           title
         )
       )
@@ -383,7 +389,7 @@ project_card <- function(..., title, src, icon, github_src = NULL) {
         class = "d-flex flex-row justify-content-between",
         
         htmltools::a(
-          class = "btn btn-default mt-4",
+          class = "c-btn mt-4",  #btn btn-default
           href = src,
           target = "_blank",
           "View"
@@ -414,15 +420,18 @@ project_card <- function(..., title, src, icon, github_src = NULL) {
 }
 
 
+
 link_button <- function() {
   htmltools::a(
     href = "projects.html",
     class = "btn btn-default btn-lg",
+    # class = "c-btn  btn-lg",
     row = "button",
     
     "View Projects"
   )
 }
+
 
 
 portfolio_footer <- function() {

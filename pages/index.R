@@ -5,11 +5,10 @@ library(fontawesome)
 
 source("C:/Users/AYOMIDE/Documents/R/agron_portfolio/utl.R")
 
-text_color <- "#32325D"
 
 index_page <- argon_page(
   
-  title = "partfolio",
+  title = "home",
   author =  "Akinwande Ayomide",
   description = "Project ShowCase",
   favicon = "dib_fav.png",
@@ -68,10 +67,8 @@ index_page <- argon_page(
           )
         ),
       
-      
       argonRow(
         center = TRUE,
-        
         
         link_button()
       ) |>
